@@ -1,44 +1,51 @@
 ﻿using UnityEngine;
+using System;
 
 public class ShipController : MonoBehaviour
 {
 	public float speed;
+	public float acceleration;
 
 	float _targetSpeed = 0f;
-	float _currentSpeed = 0f;
-	float _deltaSpeed = 0f;
-
-	Vector2 _force = new Vector2 ();
-
-	void Start ()
-	{
-		rigidbody2D.inertia = 10f;
-	}
 
 	void Update ()
 	{
 		if (Input.GetKeyDown (KeyCode.UpArrow)) {
-			_targetSpeed += speed;
-			rigidbody2D.AddForce (new Vector2 (0, speed), ForceMode2D.Impulse);
+			UpdateSpeed (1);
 		} else if (Input.GetKeyDown (KeyCode.DownArrow)) {
-			_targetSpeed = 0;
+			UpdateSpeed (-1);
 		}
-//
-//		if (_currentSpeed < _targetSpeed) {
-//			_deltaSpeed = speed;
-//		} else if (_currentSpeed > _targetSpeed) {
-//			_deltaSpeed = -speed;
-//		} else {
-//			_deltaSpeed = 0;
-//		}
+	}
+
+	void UpdateSpeed (int dir)
+	{
+		var nextSpeed = _targetSpeed + speed * dir;
+
+		if (nextSpeed < -2) {
+			_targetSpeed = -2;
+		} else if (nextSpeed > 4) {
+			_targetSpeed = 4;
+		} else {
+			_targetSpeed = nextSpeed;
+		}
 	}
 
 	void FixedUpdate ()
 	{
-		//		_currentSpeed += _deltaSpeed;
-		//		var force = new Vector2 (0, _deltaSpeed / 10);
-		//		rigidbody2D.AddForce (force);
-		//
-		Debug.Log (rigidbody2D.velocity + " " + rigidbody2D.inertia);
+		var delta = _targetSpeed - rigidbody2D.velocity.y;
+
+		if (delta != 0) {
+			var vec = new Vector2 ();
+
+			if (delta > 0) {
+				vec.y = Math.Min (acceleration, delta);
+			} else if (delta < 0) {
+				vec.y = Math.Max (-acceleration, delta);
+			}
+
+			rigidbody2D.AddForce (vec);
+		}
+
+		Debug.Log (rigidbody2D.velocity + " " + delta);
 	}
 }
