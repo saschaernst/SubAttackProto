@@ -4,7 +4,7 @@ namespace SubAttack
 {
 	public static class EntityExtensions
 	{
-		public static T AddComponent<T>(this Entity entity, int index) where T: IComponent, new()
+		public static T Add<T>(this Entity entity, int index) where T: IComponent, new()
 		{
 			T component = new T();
 			entity.AddComponent(index, component);
@@ -12,12 +12,12 @@ namespace SubAttack
 			return component;
 		}
 
-		public static void AddComponent(this Entity entity, int index)
+		public static void Add(this Entity entity, int index)
 		{
 			entity.AddComponent(index, DefaultComponent.instance);
 		}
 
-		public static IComponent EnsureComponent(this Entity entity, int index)
+		public static IComponent Ensure(this Entity entity, int index)
 		{
 			if (!entity.HasComponent(index))
 			{
@@ -27,22 +27,22 @@ namespace SubAttack
 			return entity.GetComponent(index);
 		}
 
-		public static T EnsureComponent<T>(this Entity entity, int index) where T: IComponent, new()
+		public static T Ensure<T>(this Entity entity, int index) where T: IComponent, new()
 		{
 			if (!entity.HasComponent(index))
 			{
-				entity.AddComponent<T>(index);
+				entity.Add<T>(index);
 			}
 
-			return entity.GetComponent<T>(index);
+			return entity.Get<T>(index);
 		}
 
-		public static T GetComponent<T>(this Entity entity, int index) where T: IComponent
+		public static T Get<T>(this Entity entity, int index) where T: IComponent
 		{
 			return (T)entity.GetComponent(index);
 		}
 
-		public static void UpdateComponent(this Entity entity, int index)
+		public static void Update(this Entity entity, int index)
 		{
 			if (entity.HasComponent(index))
 			{
@@ -51,7 +51,7 @@ namespace SubAttack
 			}
 		}
 
-		public static void PreventComponent(this Entity entity, int index)
+		public static void Prevent(this Entity entity, int index)
 		{
 			if (entity.HasComponent(index))
 			{
@@ -59,9 +59,9 @@ namespace SubAttack
 			}
 		}
 
-		public static T RemoveComponent<T>(this Entity entity, int index) where T: IComponent
+		public static T Remove<T>(this Entity entity, int index) where T: IComponent
 		{
-			T comp = entity.GetComponent<T>(index);
+			T comp = entity.Get<T>(index);
 			entity.RemoveComponent(index);
 
 			return comp;

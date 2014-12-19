@@ -6,6 +6,8 @@ namespace SubAttack
 	{
 		void Add<T>() where T: IEntitySystem, new();
 
+		void AddReactive<T>() where T: IReactiveSubEntitySystem, new();
+
 		void Execute();
 	}
 }

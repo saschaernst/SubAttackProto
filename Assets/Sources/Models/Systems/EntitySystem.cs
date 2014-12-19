@@ -6,28 +6,26 @@ namespace SubAttack
 	public abstract class EntitySystem : IEntitySystem
 	{
 		[Inject]
-		public IEntityCache repo { get; set; }
+		public IEntityCache entitites { get; set; }
 
+		protected int[] _typeIds;
 		EntityCollection _items;
 
 		[PostInjection]
 		public void Init()
 		{
-			int[] typeIds = GetTypeIds();
-			_items = repo.GetCollection(typeIds);
+			_items = entitites.GetCollection(_typeIds);
 		}
 
 		public void Execute()
 		{
 			Entity[] entities = _items.GetEntities();
 
-			for (int i = 0; i < entities.Length; i++)
+			for (int i = 0, length = entities.Length; i < length; i++)
 			{
 				Process(entities[i]);
 			}
 		}
-
-		protected abstract int[] GetTypeIds();
 
 		protected abstract void Process(Entity item);
 	}

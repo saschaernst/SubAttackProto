@@ -1,4 +1,5 @@
 ﻿using MinMVC;
+using Entitas;
 
 namespace SubAttack
 {
@@ -13,8 +14,8 @@ namespace SubAttack
 		public override void Execute(string prefabId)
 		{
 			var submarine = entities.CreateEntity();
-			submarine.AddComponent<Position>(CId.Position);
-			var view = submarine.AddComponent<View>(CId.View);
+			submarine.Add<Position>(CId.Position);
+			var view = submarine.Add<View>(CId.View);
 			view.prefabId = prefabId;
 
 			dispatcher.addView(view);

@@ -1,6 +1,7 @@
 ﻿using MinMVC;
 using UnityEngine;
 using System;
+using Entitas;
 
 namespace SubAttack
 {
@@ -41,7 +42,7 @@ namespace SubAttack
 		void AddSystems()
 		{
 			var systems = injector.Get<ISystems>();
-			systems.Add<MoveSystem>();
+			systems.AddReactive<RenderSystem>();
 		}
 
 		void AddCommands()
