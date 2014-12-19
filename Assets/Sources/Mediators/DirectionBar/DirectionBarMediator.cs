@@ -22,8 +22,9 @@ namespace SubAttack
 
 		void OnDragUpdate()
 		{
-			view.SetAngle(navigation.targetX, navigation.targetY);
-			view.SetScale(navigation.targetX, navigation.targetY);
+			view.SetPosition(navigation.position);
+			view.SetAngle(navigation.direction);
+			view.SetScale(navigation.direction);
 		}
 	}
 }

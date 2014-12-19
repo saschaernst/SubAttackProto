@@ -1,4 +1,5 @@
 ﻿using MinMVC;
+using UnityEngine;
 
 namespace SubAttack
 {
@@ -20,10 +21,9 @@ namespace SubAttack
 			view.onDrag -= OnDrag;
 		}
 
-		void OnDrag(float x, float y)
+		void OnDrag(Vector3 target)
 		{
-			navigation.targetX = x;
-			navigation.targetY = y;
+			navigation.target = target;
 
 			dispatcher.onDragUpdate();
 		}

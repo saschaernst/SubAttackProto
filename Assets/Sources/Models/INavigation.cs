@@ -1,9 +1,13 @@
+using UnityEngine;
+
 namespace SubAttack
 {
 	public interface INavigation
 	{
-		float targetX { get; set; }
+		Vector3 target { get; set; }
 
-		float targetY { get; set; }
+		Vector3 position { get; set; }
+
+		Vector3 direction { get; }
 	}
 }

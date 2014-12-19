@@ -5,16 +5,21 @@ namespace SubAttack
 {
 	public class DirectionBarView : MediatedView, IDirectionBarView
 	{
-		public void SetAngle(float x, float y)
+		public void SetPosition(Vector3 position)
 		{
-			var angle = Mathf.Atan2(y, x) * Mathf.Rad2Deg - 90;
+			transform.localPosition = position;
+		}
+
+		public void SetAngle(Vector3 direction)
+		{
+			var angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90;
 			transform.localEulerAngles = new Vector3(0, 0, angle);
 		}
 
-		public void SetScale(float x, float y)
+		public void SetScale(Vector3 direction)
 		{
 			var scale = transform.localScale;
-			scale.y = Mathf.Sqrt(x * x + y * y);
+			scale.y = Mathf.Sqrt(direction.x * direction.x + direction.y * direction.y);
 			transform.localScale = scale;
 		}
 	}

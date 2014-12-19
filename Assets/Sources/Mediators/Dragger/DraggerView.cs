@@ -8,7 +8,7 @@ namespace SubAttack
 	{
 		public Camera submarineCamera;
 
-		public event Action<float, float> onDrag;
+		public event Action<Vector3> onDrag;
 
 		void OnDrag(DragGesture gesture)
 		{
@@ -20,7 +20,7 @@ namespace SubAttack
 			pos.y += delta.y * scale;
 			transform.position = pos;
 
-			onDrag(pos.x, pos.y);
+			onDrag(pos);
 		}
 	}
 }

@@ -1,11 +1,14 @@
 using MinMVC;
+using UnityEngine;
 
 namespace SubAttack
 {
 	public interface IDirectionBarView : IMediatedView
 	{
-		void SetAngle(float targetX, float targetY);
+		void SetPosition(Vector3 position);
 
-		void SetScale(float targetX, float targetY);
+		void SetAngle(Vector3 direction);
+
+		void SetScale(Vector3 direction);
 	}
 }
