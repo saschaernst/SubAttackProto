@@ -1,6 +1,7 @@
-﻿namespace Entitas {
-    public interface IEntitySystem {
-        void Execute();
-    }
+﻿namespace Entitas
+{
+	public interface IEntitySystem
+	{
+		void Execute();
+	}
 }
-

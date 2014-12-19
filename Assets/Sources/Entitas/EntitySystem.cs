@@ -13,13 +13,13 @@ namespace SubAttack
 		[PostInjection]
 		public void Init()
 		{
-			var typeIds = GetTypeIds();
+			int[] typeIds = GetTypeIds();
 			_items = repo.GetCollection(typeIds);
 		}
 
 		public void Execute()
 		{
-			var entities = _items.GetEntities();
+			Entity[] entities = _items.GetEntities();
 
 			for (int i = 0; i < entities.Length; i++)
 			{
