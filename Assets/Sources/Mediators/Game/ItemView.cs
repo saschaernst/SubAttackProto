@@ -13,9 +13,13 @@ namespace SubAttack
 			}
 		}
 
-		public void Rotate(Vector3 rotation)
-		{
-			transform.Rotate(rotation);
+		public Quaternion rotation {
+			get {
+				return transform.localRotation;
+			}
+			set {
+				transform.localRotation = value;
+			}
 		}
 	}
 }

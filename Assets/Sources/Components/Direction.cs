@@ -7,6 +7,5 @@ namespace SubAttack
 		public float current;
 		public float target;
 		public float rotationSpeed;
-		public float step;
 	}
 }

@@ -47,30 +47,37 @@ namespace SubAttack
 		float UpdateDirection(Entity item)
 		{
 			Direction direction = item.Get<Direction>(CId.Direction);
+			float rotationSpeed = direction.rotationSpeed * Time.deltaTime;
 			float target = direction.target;
-			float current = direction.current;
-			float step = direction.rotationSpeed * Time.deltaTime;
+			float current = CalcCurrent(direction.current, target);
 
-			Debug.Log(target - current);
-
-			if (target > current + step)
+			if (target > current + rotationSpeed)
 			{
-				direction.current += step;
+				direction.current += rotationSpeed;
 			}
-			else if (target < current - step)
+			else if (target < current - rotationSpeed)
 			{
-				step = -step;
-				direction.current += step;
+				direction.current -= rotationSpeed;
 			}
 			else
 			{
-				step = target - direction.current;
 				direction.current = target;
 			}
 
-			direction.step = step;
-
 			return direction.current;
+		}
+
+		float CalcCurrent(float current, float target)
+		{
+			float delta = target - current;
+			float dir = delta > 0 ? 1 : -1;
+
+			if (delta * dir > 180 && current * dir < 0)
+			{
+				current += 360 * dir;
+			}
+
+			return current;
 		}
 
 		void UpdatePosition(Entity item, float speed, float direction)

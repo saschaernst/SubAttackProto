@@ -6,6 +6,6 @@ namespace SubAttack
 	{
 		Vector3 position { get; set; }
 
-		void Rotate(Vector3 rotation);
+		Quaternion rotation { get; set; }
 	}
 }
