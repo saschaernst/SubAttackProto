@@ -17,16 +17,16 @@ namespace SubAttack
 			}
 		}
 
-		public override void OnMediate()
-		{
-			dragger.onDrag += OnDrag;
+		public Vector3 direction {
+			set {
+				directionBar.SetAngle(value);
+				directionBar.SetScale(value);
+			}
 		}
 
-		void OnDrag(Vector3 direction)
+		public override void OnMediate()
 		{
-			directionBar.SetAngle(direction);
-			directionBar.SetScale(direction);
-			onDrag(direction);
+			dragger.onDrag += onDrag;
 		}
 	}
 }

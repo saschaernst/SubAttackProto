@@ -9,5 +9,7 @@ namespace SubAttack
 		event Action<Vector3> onDrag;
 
 		Vector3 position { set; }
+
+		Vector3 direction { set; }
 	}
 }

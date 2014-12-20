@@ -17,7 +17,7 @@ namespace SubAttack
 			Vector3 velocity = new Vector3(0, speed.amount, 0);
 			Position position = item.Update<Position>(CId.Position);
 
-			position.position += velocity;
+			position.position += velocity * Time.deltaTime;
 		}
 	}
 }

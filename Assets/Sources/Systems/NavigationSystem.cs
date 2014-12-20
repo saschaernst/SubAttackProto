@@ -1,5 +1,6 @@
 ﻿using Entitas;
 using MinMVC;
+using UnityEngine;
 
 namespace SubAttack
 {
@@ -20,6 +21,17 @@ namespace SubAttack
 		{
 			Position position = item.Update<Position>(CId.Position);
 			navigation.position = position.position;
+
+			var targetSpeed = navigation.direction.magnitude;
+
+			if (targetSpeed != 0)
+			{
+				item.Ensure<Speed>(CId.Speed).amount = targetSpeed;
+			}
+			else
+			{
+				item.Prevent(CId.Speed);
+			}
 
 			dispatcher.onNavigationUpdate();
 		}

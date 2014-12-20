@@ -8,19 +8,24 @@ namespace SubAttack
 		public Camera submarineCamera;
 
 		public event Action<Vector3> onDrag;
+		//
+		//		public Vector3 position {
+		//			set {
+		//				transform.position = value;
+		//			}
+		//		}
 
 		void OnDrag(DragGesture gesture)
 		{
 			float camSize = submarineCamera.orthographicSize * 2;
 			float scale = camSize / Screen.height;
+			Vector2 delta = gesture.DeltaMove;
+			Vector3 position = transform.position;
+			position.x += delta.x * scale;
+			position.y += delta.y * scale;
+			transform.position = position;
 
-			Vector2 inputPosition = gesture.Position;
-			inputPosition.x -= Screen.width / 2;
-			inputPosition.y -= Screen.height / 2;
-			inputPosition *= scale;
-			transform.localPosition = inputPosition;
-
-			onDrag(inputPosition);
+			onDrag(position);
 		}
 	}
 }

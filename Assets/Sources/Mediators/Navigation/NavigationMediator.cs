@@ -16,6 +16,8 @@ namespace SubAttack
 			view.onDrag += OnDrag;
 
 			dispatcher.onNavigationUpdate += OnNavigationUpdate;
+
+			UpdateDirection();
 		}
 
 		protected override void OnRemove()
@@ -27,7 +29,13 @@ namespace SubAttack
 
 		void OnDrag(Vector3 target)
 		{
-			navigation.target = target;
+			navigation.direction = target - navigation.position;
+			UpdateDirection();
+		}
+
+		void UpdateDirection()
+		{
+			view.direction = navigation.direction;
 		}
 
 		void OnNavigationUpdate()
