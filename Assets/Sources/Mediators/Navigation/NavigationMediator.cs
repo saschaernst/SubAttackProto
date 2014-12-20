@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace SubAttack
 {
-	public class DraggerMediator : Mediator<IDraggerView>
+	public class NavigationMediator : Mediator<INavigationView>
 	{
 		[Inject]
 		public INavigation navigation;
@@ -14,18 +14,25 @@ namespace SubAttack
 		protected override void OnRegister()
 		{
 			view.onDrag += OnDrag;
+
+			dispatcher.onNavigationUpdate += OnNavigationUpdate;
 		}
 
 		protected override void OnRemove()
 		{
 			view.onDrag -= OnDrag;
+
+			dispatcher.onNavigationUpdate -= OnNavigationUpdate;
 		}
 
 		void OnDrag(Vector3 target)
 		{
 			navigation.target = target;
+		}
 
-			dispatcher.onDragUpdate();
+		void OnNavigationUpdate()
+		{
+			view.position = navigation.position;
 		}
 	}
 }

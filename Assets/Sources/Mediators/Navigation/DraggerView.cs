@@ -1,10 +1,9 @@
 ﻿using UnityEngine;
-using MinMVC;
 using System;
 
 namespace SubAttack
 {
-	public class DraggerView : MediatedView, IDraggerView
+	public class DraggerView : MonoBehaviour
 	{
 		public Camera submarineCamera;
 
@@ -14,13 +13,14 @@ namespace SubAttack
 		{
 			float camSize = submarineCamera.orthographicSize * 2;
 			float scale = camSize / Screen.height;
-			Vector2 delta = gesture.DeltaMove;
-			Vector3 pos = transform.position;
-			pos.x += delta.x * scale;
-			pos.y += delta.y * scale;
-			transform.position = pos;
 
-			onDrag(pos);
+			Vector2 inputPosition = gesture.Position;
+			inputPosition.x -= Screen.width / 2;
+			inputPosition.y -= Screen.height / 2;
+			inputPosition *= scale;
+			transform.localPosition = inputPosition;
+
+			onDrag(inputPosition);
 		}
 	}
 }

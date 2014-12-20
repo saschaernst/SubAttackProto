@@ -1,7 +1,6 @@
 ﻿using MinMVC;
 using UnityEngine;
 using System;
-using Entitas;
 
 namespace SubAttack
 {
@@ -33,8 +32,8 @@ namespace SubAttack
 		{
 			var mediators = injector.Get<IMediators>();
 			mediators.Map<IGameView, GameMediator>();
-			mediators.Map<IDraggerView, DraggerMediator>();
-			mediators.Map<IDirectionBarView, DirectionBarMediator>();
+			mediators.Map<INavigationView, NavigationMediator>();
+			mediators.Map<ICameraView, CameraMediator>();
 
 			mediators.Mediate(this);
 		}
@@ -42,7 +41,9 @@ namespace SubAttack
 		void AddSystems()
 		{
 			var systems = injector.Get<ISystems>();
+			systems.Add<MoveSystem>();
 			systems.AddReactive<RenderSystem>();
+			systems.AddReactive<NavigationSystem>();
 		}
 
 		void AddCommands()

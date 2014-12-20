@@ -1,15 +1,9 @@
-﻿using MinMVC;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace SubAttack
 {
-	public class DirectionBarView : MediatedView, IDirectionBarView
+	public class DirectionBarView : MonoBehaviour
 	{
-		public void SetPosition(Vector3 position)
-		{
-			transform.localPosition = position;
-		}
-
 		public void SetAngle(Vector3 direction)
 		{
 			var angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90;

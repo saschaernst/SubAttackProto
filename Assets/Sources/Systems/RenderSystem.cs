@@ -11,7 +11,7 @@ namespace SubAttack
 
 		protected override void Process(Entity item)
 		{
-			item.Get<View>(CId.View).itemView.position = item.Get<Position>(CId.Position).pos;
+			item.Get<View>(CId.View).itemView.position = item.Get<Position>(CId.Position).position;
 		}
 	}
 }

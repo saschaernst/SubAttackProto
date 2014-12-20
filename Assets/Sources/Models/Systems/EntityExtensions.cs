@@ -4,6 +4,11 @@ namespace SubAttack
 {
 	public static class EntityExtensions
 	{
+		public static bool Has(this Entity entity, int index)
+		{
+			return entity.HasComponent(index);
+		}
+
 		public static T Add<T>(this Entity entity, int index) where T: IComponent, new()
 		{
 			T component = new T();
@@ -49,6 +54,13 @@ namespace SubAttack
 				var comp = entity.GetComponent(index);
 				entity.ReplaceComponent(index, comp);
 			}
+		}
+
+		public static T Update<T>(this Entity entity, int index) where T: IComponent
+		{
+			entity.Update(index);
+
+			return entity.Get<T>(index);
 		}
 
 		public static void Prevent(this Entity entity, int index)

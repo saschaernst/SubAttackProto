@@ -8,5 +8,6 @@
 		readonly public static int Direction = count++;
 		readonly public static int Speed = count++;
 		readonly public static int View = count++;
+		readonly public static int Navigation = count++;
 	}
 }
