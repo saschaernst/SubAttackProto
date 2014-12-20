@@ -7,5 +7,7 @@ namespace SubAttack
 		Vector3 position { get; set; }
 
 		Vector3 direction { get; set; }
+
+		float speed { get; }
 	}
 }

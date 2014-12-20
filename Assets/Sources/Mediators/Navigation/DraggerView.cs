@@ -8,12 +8,6 @@ namespace SubAttack
 		public Camera submarineCamera;
 
 		public event Action<Vector3> onDrag;
-		//
-		//		public Vector3 position {
-		//			set {
-		//				transform.position = value;
-		//			}
-		//		}
 
 		void OnDrag(DragGesture gesture)
 		{

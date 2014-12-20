@@ -4,6 +4,8 @@ namespace SubAttack
 {
 	public class Speed : IComponent
 	{
-		public float amount;
+		public float current;
+		public float target;
+		public float acceleration;
 	}
 }

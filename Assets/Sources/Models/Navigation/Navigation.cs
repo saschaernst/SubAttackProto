@@ -7,5 +7,7 @@ namespace SubAttack
 		public Vector3 direction { get; set; }
 
 		public Vector3 position { get; set; }
+
+		public float speed { get { return direction.magnitude; } }
 	}
 }
