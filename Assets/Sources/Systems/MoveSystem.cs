@@ -12,8 +12,13 @@ namespace SubAttack
 
 		protected override void Process(Entity item)
 		{
-			var currentSpeed = UpdateSpeed(item);
-			UpdadatePosition(item, currentSpeed);
+			var speed = UpdateSpeed(item);
+
+			if (speed != 0)
+			{
+				float direction = UpdateDirection(item);
+				UpdatePosition(item, speed, direction);
+			}
 		}
 
 		float UpdateSpeed(Entity item)
@@ -39,11 +44,41 @@ namespace SubAttack
 			return speed.current;
 		}
 
-		void UpdadatePosition(Entity item, float current)
+		float UpdateDirection(Entity item)
 		{
-			Vector3 velocity = new Vector3(0, current, 0);
+			Direction direction = item.Get<Direction>(CId.Direction);
+			float target = direction.target;
+			float current = direction.current;
+			float step = direction.rotationSpeed * Time.deltaTime;
+
+			Debug.Log(target - current);
+
+			if (target > current + step)
+			{
+				direction.current += step;
+			}
+			else if (target < current - step)
+			{
+				step = -step;
+				direction.current += step;
+			}
+			else
+			{
+				step = target - direction.current;
+				direction.current = target;
+			}
+
+			direction.step = step;
+
+			return direction.current;
+		}
+
+		void UpdatePosition(Entity item, float speed, float direction)
+		{
+			Vector3 velocity = new Vector3(0, speed * Time.deltaTime, 0);
+			Quaternion rotation = Quaternion.Euler(new Vector3(0, 0, direction));
 			Position position = item.Update<Position>(CId.Position);
-			position.position += velocity * Time.deltaTime;
+			position.position = position.position + rotation * velocity;
 		}
 	}
 }

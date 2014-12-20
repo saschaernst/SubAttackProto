@@ -12,5 +12,10 @@ namespace SubAttack
 				transform.localPosition = value;
 			}
 		}
+
+		public void Rotate(Vector3 rotation)
+		{
+			transform.Rotate(rotation);
+		}
 	}
 }

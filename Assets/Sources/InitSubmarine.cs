@@ -19,8 +19,11 @@ namespace SubAttack
 
 			submarine.Add(CId.Navigation);
 
-			var velocity = submarine.Add<Speed>(CId.Speed);
-			velocity.acceleration = 1f;
+			var speed = submarine.Add<Speed>(CId.Speed);
+			speed.acceleration = 1f;
+
+			var direction = submarine.Add<Direction>(CId.Direction);
+			direction.rotationSpeed = 20f;
 
 			var view = submarine.Add<View>(CId.View);
 			view.prefabId = prefabId;

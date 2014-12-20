@@ -1,5 +1,6 @@
 ﻿using Entitas;
 using MinMVC;
+using UnityEngine;
 
 namespace SubAttack
 {
@@ -20,7 +21,19 @@ namespace SubAttack
 		{
 			Position position = item.Update<Position>(CId.Position);
 			navigation.position = position.position;
+
 			item.Get<Speed>(CId.Speed).target = navigation.speed;
+
+			Vector2 direction = navigation.direction;
+			float target = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90;
+
+			if (target < -180f)
+			{
+				target += 360;
+			}
+
+			item.Get<Direction>(CId.Direction).target = target;
+
 			dispatcher.onNavigationUpdate();
 		}
 	}
