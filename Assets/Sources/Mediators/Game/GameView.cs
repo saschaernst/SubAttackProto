@@ -69,7 +69,6 @@ namespace SubAttack
 		T CreateFromResources<T>(string resource) where T: UnityEngine.Object
 		{
 			T prefab = Resources.Load<T>(resource);
-			Debug.Log(resource);
 			T instance = Instantiate(prefab) as T;
 		
 			return instance;
