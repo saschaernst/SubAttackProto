@@ -1,4 +1,5 @@
 ﻿using MinMVC;
+using UnityEngine;
 
 namespace SubAttack
 {
@@ -12,17 +13,24 @@ namespace SubAttack
 
 		protected override void OnRegister()
 		{
+			view.onTap += OnTap;
 			dispatcher.onNavigationUpdate += OnNavigationUpdate;
 		}
 
 		protected override void OnRemove()
 		{
+			view.onTap -= OnTap;
 			dispatcher.onNavigationUpdate -= OnNavigationUpdate;
 		}
 
 		void OnNavigationUpdate()
 		{
 			view.position = navigation.position;
+		}
+
+		void OnTap(Vector2 target)
+		{
+			dispatcher.fireTorpedo("sub", target);
 		}
 	}
 }

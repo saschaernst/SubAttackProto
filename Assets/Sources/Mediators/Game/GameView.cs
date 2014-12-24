@@ -25,6 +25,7 @@ namespace SubAttack
 			injector.Register<IMediators, Mediators>();
 			injector.Register<INavigation, Navigation>();
 			injector.Register<IEntityCache, EntityCache>();
+			injector.Register<IVehicles, Vehicles>();
 			injector.Register<ISystems, Systems>();
 		}
 
@@ -52,6 +53,7 @@ namespace SubAttack
 			var dispatcher = injector.Get<GameDispatcher>();
 
 			dispatcher.initSubmarine += commands.Get<InitSubmarine>().Execute;
+			dispatcher.fireTorpedo += commands.Get<FireTorpedo>().Execute;
 
 			dispatcher.initSubmarine("Submarine");
 		}

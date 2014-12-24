@@ -11,19 +11,18 @@ namespace SubAttack
 		[Inject]
 		public GameDispatcher dispatcher;
 
+		[Inject]
+		public IVehicles vehicles;
+
 		public override void Execute(string prefabId)
 		{
 			var submarine = entities.CreateEntity();
+			vehicles.Add("sub", submarine);
 
 			submarine.Add<Position>(CId.Position);
-
 			submarine.Add(CId.Navigation);
-
-			var speed = submarine.Add<Speed>(CId.Speed);
-			speed.acceleration = 1f;
-
-			var direction = submarine.Add<Direction>(CId.Direction);
-			direction.rotationSpeed = 20f;
+			submarine.Add<Speed>(CId.Speed).acceleration = 1f;
+			submarine.Add<Orientation>(CId.Orientation).rotationSpeed = 10f;
 
 			var view = submarine.Add<View>(CId.View);
 			view.prefabId = prefabId;

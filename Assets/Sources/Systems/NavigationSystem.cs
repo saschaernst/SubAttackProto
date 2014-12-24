@@ -24,16 +24,19 @@ namespace SubAttack
 
 			item.Get<Speed>(CId.Speed).target = navigation.speed;
 
-			Vector2 direction = navigation.direction;
-			float target = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90;
-
-			if (target < -180f)
+			if (navigation.speed != 0)
 			{
-				target += 360;
+				Vector2 orientation = navigation.orientation;
+				float target = Mathf.Atan2(orientation.y, orientation.x) * Mathf.Rad2Deg - 90;
+
+				if (target < -180f)
+				{
+					target += 360;
+				}
+
+				item.Get<Orientation>(CId.Orientation).target = target;
 			}
-
-			item.Get<Direction>(CId.Direction).target = target;
-
+			
 			dispatcher.onNavigationUpdate();
 		}
 	}

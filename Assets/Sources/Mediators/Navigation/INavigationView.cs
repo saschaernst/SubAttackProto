@@ -10,6 +10,6 @@ namespace SubAttack
 
 		Vector3 position { set; }
 
-		Vector3 direction { set; }
+		void UpdateDirection(Vector3 position, Vector3 direction);
 	}
 }

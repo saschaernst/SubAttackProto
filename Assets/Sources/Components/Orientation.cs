@@ -2,7 +2,7 @@
 
 namespace SubAttack
 {
-	public class Direction : IComponent
+	public class Orientation : IComponent
 	{
 		public float current;
 		public float target;

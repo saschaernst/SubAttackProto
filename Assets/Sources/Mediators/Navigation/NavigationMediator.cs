@@ -27,15 +27,18 @@ namespace SubAttack
 			dispatcher.onNavigationUpdate -= OnNavigationUpdate;
 		}
 
-		void OnDrag(Vector3 target)
+		void OnDrag(Vector3 delta)
 		{
-			navigation.direction = target - navigation.position;
+			bool isMoving = navigation.isMoving;
+			navigation.UpdateDirection(delta);
+
+			//navigation.direction = target - navigation.position;
 			UpdateDirection();
 		}
 
 		void UpdateDirection()
 		{
-			view.direction = navigation.direction;
+			view.UpdateDirection(navigation.position, navigation.orientation);
 		}
 
 		void OnNavigationUpdate()

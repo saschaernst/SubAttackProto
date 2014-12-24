@@ -46,7 +46,7 @@ namespace SubAttack
 
 		float UpdateDirection(Entity item)
 		{
-			Direction direction = item.Get<Direction>(CId.Direction);
+			Orientation direction = item.Get<Orientation>(CId.Orientation);
 			float rotationSpeed = direction.rotationSpeed * Time.deltaTime;
 			float target = direction.target;
 			float current = CalcCurrent(direction.current, target);

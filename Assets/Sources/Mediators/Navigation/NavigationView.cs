@@ -17,11 +17,11 @@ namespace SubAttack
 			}
 		}
 
-		public Vector3 direction {
-			set {
-				directionBar.SetAngle(value);
-				directionBar.SetScale(value);
-			}
+		public void UpdateDirection(Vector3 position, Vector3 direction)
+		{
+			directionBar.SetAngle(direction);
+			directionBar.SetScale(direction);
+			dragger.SetPosition(position + direction);
 		}
 
 		public override void OnMediate()

@@ -6,19 +6,20 @@ namespace SubAttack
 {
 	public class CameraView : MediatedView, ICameraView
 	{
-		public PinchRecognizer pincher;
+		[SerializeField]
+		PinchRecognizer pincher;
+		[SerializeField]
+		TapRecognizer tapper;
+		[SerializeField]
+		Vector3 offset;
+		[SerializeField]
+		float minSize = 3f;
+		[SerializeField]
+		float maxSize = 50f;
+		[SerializeField]
+		float zoom = 10f;
 
-		public Vector3 offset;
-		public float minSize = 3f;
-		public float maxSize = 50f;
-		public float zoom = 10f;
-
-		protected override void Start()
-		{
-			base.Start();
-
-			pincher.OnGesture += OnPinch;
-		}
+		public event Action<Vector2> onTap;
 
 		public Vector3 position {
 			set {
@@ -29,13 +30,45 @@ namespace SubAttack
 			}
 		}
 
-		public void OnPinch(PinchGesture gesture)
+		protected override void Start()
 		{
-			var cam = Camera.main;
-			var size = cam.orthographicSize - gesture.Delta / zoom;
+			base.Start();
+
+			pincher.OnGesture += OnPinch;
+			tapper.OnGesture += OnTap;
+		}
+
+		void OnPinch(PinchGesture gesture)
+		{
+			var size = camSize - gesture.Delta / zoom;
 			size = Math.Max(minSize, size);
 			size = Math.Min(maxSize, size);
-			cam.orthographicSize = size;
+			camSize = size;
+		}
+
+		void OnTap(TapGesture gesture)
+		{
+			Vector2 tapPos = gesture.Position;
+			tapPos.x -= Screen.width / 2;
+			tapPos.y -= Screen.height / 2;
+
+			float scale = camSize * 2 / Screen.height;
+			tapPos *= scale;
+
+			Vector3 cameraPos = transform.localPosition;
+			tapPos.x += cameraPos.x;
+			tapPos.y += cameraPos.y;
+
+			onTap(tapPos);
+		}
+
+		float camSize {
+			get {
+				return Camera.main.orthographicSize;
+			}
+			set {
+				Camera.main.orthographicSize = value;
+			}
 		}
 	}
 }
